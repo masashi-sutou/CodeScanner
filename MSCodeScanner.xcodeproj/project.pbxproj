@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		180C63481E56147700ED96E1 /* BarcodeDetectForCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180C63471E56147700ED96E1 /* BarcodeDetectForCameraViewController.swift */; };
+		180C634E1E58302300ED96E1 /* String+converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180C634D1E58302300ED96E1 /* String+converter.swift */; };
+		180C63501E58444200ED96E1 /* QRCodeDetectForCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180C634F1E58444200ED96E1 /* QRCodeDetectForCameraViewController.swift */; };
 		18FC2AF31E535C9E0095AE71 /* MSCodeScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = 18FC2AF11E535C9E0095AE71 /* MSCodeScanner.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		18FC2B001E535CB90095AE71 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FC2AFF1E535CB90095AE71 /* AppDelegate.swift */; };
 		18FC2B021E535CB90095AE71 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FC2B011E535CB90095AE71 /* ViewController.swift */; };
@@ -46,6 +49,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		180C63471E56147700ED96E1 /* BarcodeDetectForCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeDetectForCameraViewController.swift; sourceTree = "<group>"; };
+		180C634D1E58302300ED96E1 /* String+converter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+converter.swift"; sourceTree = "<group>"; };
+		180C634F1E58444200ED96E1 /* QRCodeDetectForCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeDetectForCameraViewController.swift; sourceTree = "<group>"; };
 		18FC2AEE1E535C9E0095AE71 /* MSCodeScanner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MSCodeScanner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		18FC2AF11E535C9E0095AE71 /* MSCodeScanner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MSCodeScanner.h; sourceTree = "<group>"; };
 		18FC2AF21E535C9E0095AE71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -105,6 +111,7 @@
 				18FC2AF11E535C9E0095AE71 /* MSCodeScanner.h */,
 				18FC2B141E535D410095AE71 /* MSCode.swift */,
 				18FC2B161E535D710095AE71 /* MSCodeScanner.swift */,
+				180C634D1E58302300ED96E1 /* String+converter.swift */,
 				18FC2AF21E535C9E0095AE71 /* Info.plist */,
 			);
 			path = MSCodeScanner;
@@ -127,8 +134,8 @@
 		18FC2B1E1E535E930095AE71 /* Generate */ = {
 			isa = PBXGroup;
 			children = (
-				18FC2B181E535E040095AE71 /* BarcodeGenerateViewController.swift */,
 				18FC2B1A1E535E330095AE71 /* QRGenerateViewController.swift */,
+				18FC2B181E535E040095AE71 /* BarcodeGenerateViewController.swift */,
 			);
 			name = Generate;
 			sourceTree = "<group>";
@@ -145,6 +152,8 @@
 		18FC2B201E535EB60095AE71 /* Camera */ = {
 			isa = PBXGroup;
 			children = (
+				180C634F1E58444200ED96E1 /* QRCodeDetectForCameraViewController.swift */,
+				180C63471E56147700ED96E1 /* BarcodeDetectForCameraViewController.swift */,
 			);
 			name = Camera;
 			sourceTree = "<group>";
@@ -225,6 +234,7 @@
 					};
 					18FC2AFC1E535CB90095AE71 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = E8L2964G6Z;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -273,6 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18FC2B151E535D410095AE71 /* MSCode.swift in Sources */,
+				180C634E1E58302300ED96E1 /* String+converter.swift in Sources */,
 				18FC2B171E535D710095AE71 /* MSCodeScanner.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -281,9 +292,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				180C63501E58444200ED96E1 /* QRCodeDetectForCameraViewController.swift in Sources */,
 				18FC2B1D1E535E6F0095AE71 /* QRDetectForPhotoLibraryViewController.swift in Sources */,
 				18FC2B021E535CB90095AE71 /* ViewController.swift in Sources */,
 				18FC2B191E535E040095AE71 /* BarcodeGenerateViewController.swift in Sources */,
+				180C63481E56147700ED96E1 /* BarcodeDetectForCameraViewController.swift in Sources */,
 				18FC2B1B1E535E330095AE71 /* QRGenerateViewController.swift in Sources */,
 				18FC2B001E535CB90095AE71 /* AppDelegate.swift in Sources */,
 			);
@@ -423,6 +436,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.masashi.sutou.MSCodeScanner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -456,9 +470,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = E8L2964G6Z;
 				INFOPLIST_FILE = Demo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.masashi.sutou.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
@@ -470,6 +486,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = E8L2964G6Z;
 				INFOPLIST_FILE = Demo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

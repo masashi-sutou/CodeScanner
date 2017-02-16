@@ -32,6 +32,8 @@ final class ViewController: UITableViewController {
             return 2
         case 1:
             return 1
+        case 2:
+            return 2
         default:
             return 0
         }
@@ -75,6 +77,17 @@ final class ViewController: UITableViewController {
             }
         }
         
+        if indexPath.section == 2 {
+            switch indexPath.row {
+            case 0:
+                cell.textLabel?.text = "QR code"
+            case 1:
+                cell.textLabel?.text = "Barcode"
+            default:
+                break
+            }
+        }
+        
         return cell
     }
     
@@ -97,6 +110,17 @@ final class ViewController: UITableViewController {
             switch indexPath.row {
             case 0:
                 self.navigationController?.pushViewController(QRDetectForPhotoLibraryViewController(), animated: true)
+            default:
+                break
+            }
+        }
+        
+        if indexPath.section == 2 {
+            switch indexPath.row {
+            case 0:
+                self.navigationController?.pushViewController(QRCodeDetectForCameraViewController(), animated: true)
+            case 1:
+                self.navigationController?.pushViewController(BarcodeDetectForCameraViewController(), animated: true)
             default:
                 break
             }
