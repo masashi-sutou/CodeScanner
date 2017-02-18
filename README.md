@@ -28,7 +28,7 @@ self.imageView.image = MSCode.generateQRCode(text: "message")
 self.imageView.image = MSCode.generate128Barcode(text: "message")
 ```
 
-#### Photo detect
+#### Detect photo
 - QR
 ```Swift
 // MARK: UINavigationControllerDelegate, UIImagePickerControllerDelegate
@@ -49,7 +49,7 @@ func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMe
 }
 ```
 
-#### Camera detect
+#### Detect by camera
 - QR
 ```Swift
 import UIKit
