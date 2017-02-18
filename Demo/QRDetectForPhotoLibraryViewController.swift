@@ -24,7 +24,7 @@ final class QRDetectForPhotoLibraryViewController: UIViewController, UINavigatio
         
         super.viewDidLoad()
         
-        self.navigationItem.title = "Detect QR code from Photo"
+        self.navigationItem.title = "Detect QR code in photo"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "album", style: .done, target: self, action: .albumButtonTapped)
         self.view.backgroundColor = .groupTableViewBackground
         

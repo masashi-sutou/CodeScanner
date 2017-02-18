@@ -21,7 +21,7 @@ final class BarcodeGenerateViewController: UIViewController {
         
         super.viewDidLoad()
         
-        self.navigationItem.title = "Generate a Barcode"
+        self.navigationItem.title = "Generate a barcode"
         self.view.backgroundColor = .groupTableViewBackground
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "generate", style: .done, target: self, action: .generateButtonTapped)

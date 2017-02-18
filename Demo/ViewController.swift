@@ -45,9 +45,9 @@ final class ViewController: UITableViewController {
         case 0:
             return "Generate"
         case 1:
-            return "Photo detect"
+            return "Detect photo"
         case 2:
-            return "Camera detect"
+            return "Detect by camera"
         default:
             return ""
         }

@@ -5,9 +5,9 @@ MSCodeScanner
 - Generate code
   - QR
   - Code128Barcode
-- Photo detect
+- Detect photo
   - QR
-- Camera detect
+- Detect by camera
   - QR
   - Code128Barcode
 

@@ -18,7 +18,7 @@ final class BarcodeDetectForCameraViewController: UIViewController {
         
         super.viewDidLoad()
         
-        self.navigationItem.title = "Detect Barcode from Camera"
+        self.navigationItem.title = "Detect barcode by camera"
         self.view.backgroundColor = .groupTableViewBackground
         
         self.scanner = MSCodeScanner(metadataObjectTypes: [AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeCode128Code], preview: self.view)
