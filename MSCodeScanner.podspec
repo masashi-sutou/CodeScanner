@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                  = "MSCodeScanner"
-  s.version               = "1.0.2"
+  s.version               = "1.0.3"
   s.summary               = "MSCodeScanner is easy to scan a barcode or QR code."
   s.homepage              = "https://github.com/masashi-sutou/MSCodeScanner"
   s.license               = { :type => "MIT", :file => "LICENSE" }

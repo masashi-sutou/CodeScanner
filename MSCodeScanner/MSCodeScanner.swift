@@ -103,8 +103,20 @@ public class MSCodeScanner: NSObject, AVCaptureMetadataOutputObjectsDelegate {
             print(error)
         }
     }
+
+    // MARK: - start, stop
     
-    // MARK: AVCaptureMetadataOutputObjectsDelegate
+    public func start() {
+
+        self.captureSession.startRunning()
+    }
+    
+    public func stop() {
+        
+        self.captureSession.stopRunning()
+    }
+    
+    // MARK: - AVCaptureMetadataOutputObjectsDelegate
     
     public func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
         
