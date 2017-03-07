@@ -23,7 +23,7 @@ public class MSCodeScanner: NSObject, AVCaptureMetadataOutputObjectsDelegate {
     private let originX: CGFloat = 0.1
     private let originY: CGFloat = 0.4
     private let width: CGFloat = 0.8
-    private let height: CGFloat = 0.2
+    private let height: CGFloat = 0.3
 
     public init(metadataObjectTypes: [String], preview: UIView) {
 
@@ -49,7 +49,7 @@ public class MSCodeScanner: NSObject, AVCaptureMetadataOutputObjectsDelegate {
         }
     }
     
-    public func scan(frame: CGRect, resultOutputs: @escaping ([String]) -> Void) {
+    public func scan(resultOutputs: @escaping ([String]) -> Void) {
         
         self.captureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
         
@@ -71,7 +71,7 @@ public class MSCodeScanner: NSObject, AVCaptureMetadataOutputObjectsDelegate {
             // capture full screen from camera
             self.previewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession)
             self.previewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
-            self.previewLayer?.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
+            self.previewLayer?.frame = CGRect(x: 0, y: 0, width: self.preview.frame.width, height: self.preview.frame.height)
             self.preview.layer.insertSublayer(self.previewLayer!, at: 0)
             
             if let type: String = self.types.first {
@@ -82,7 +82,9 @@ public class MSCodeScanner: NSObject, AVCaptureMetadataOutputObjectsDelegate {
                     metaOutput.rectOfInterest = CGRect(x: originY, y: 1 - originX - width, width: height, height: width)
 
                     // attributed scan area
-                    let borderView = UIView(frame: CGRect(x: originX * frame.width, y: originY * frame.height, width: width * frame.width, height: height * frame.height))
+                    let pFrame: CGRect = self.preview.frame
+                    let bFrame: CGRect = CGRect(x: originX * pFrame.width, y: originY * pFrame.height, width: width * pFrame.width, height: height * pFrame.height)
+                    let borderView = UIView(frame: bFrame)
                     borderView.layer.borderWidth = 2
                     borderView.layer.borderColor = UIColor.red.cgColor
                     self.preview.addSubview(borderView)
@@ -120,7 +122,6 @@ public class MSCodeScanner: NSObject, AVCaptureMetadataOutputObjectsDelegate {
     
     public func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
         
-        self.captureSession.stopRunning()
         guard let objects = metadataObjects as? [AVMetadataObject] else { return }
 
         var detectionStrings: [String] = []
@@ -148,7 +149,5 @@ public class MSCodeScanner: NSObject, AVCaptureMetadataOutputObjectsDelegate {
         if let _ = self.resultOutputs {
             self.resultOutputs!(detectionStrings)
         }
-        
-        self.captureSession.startRunning()
     }
 }

@@ -29,7 +29,7 @@ final class QRCodeDetectForCameraViewController: UIViewController {
         
         MSCodeScanner.requestCameraPermission { (success) in
             if success {
-                self.scanner.scan(frame: self.view.frame, resultOutputs: { (outputs) in
+                self.scanner.scan(resultOutputs: { (outputs) in
                     print(outputs)
                 })
             }

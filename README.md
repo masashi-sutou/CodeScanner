@@ -75,7 +75,7 @@ final class QRCodeDetectForCameraViewController: UIViewController {
 
         MSCodeScanner.requestCameraPermission { (success) in
             if success {
-                self.scanner.scan(frame: self.view.frame, resultOutputs: { (outputs) in
+                self.scanner.scan(resultOutputs: { (outputs) in
                     print(outputs)
                 })
             }
@@ -109,9 +109,14 @@ final class BarcodeDetectForCameraViewController: UIViewController {
 
         MSCodeScanner.requestCameraPermission { (success) in
             if success {
-                self.scanner.scan(frame: self.view.frame, resultOutputs: { (outputs) in
-                    outputs.first?.convartISBN()?.searchAamazon()
+                self.scanner.scan(resultOutputs: { (outputs) in
+
                     print(outputs)
+
+                    if let isbn = outputs.first?.convartISBN() {
+                        self.scanner.stop()
+                        isbn.searchAamazon()
+                    }
                 })
             }
         }
