@@ -1,6 +1,6 @@
 //
-//  MSCodeScanner.swift
-//  MSCodeScanner
+//  CodeScanner.swift
+//  CodeScanner
 //
 //  Created by 須藤 将史 on 2017/02/15.
 //  Copyright © 2017年 masashi_sutou. All rights reserved.
@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-public class MSCodeScanner: NSObject, AVCaptureMetadataOutputObjectsDelegate {
+public class CodeScanner: NSObject, AVCaptureMetadataOutputObjectsDelegate {
     
     private let captureSession = AVCaptureSession()
     private var previewLayer: AVCaptureVideoPreviewLayer?

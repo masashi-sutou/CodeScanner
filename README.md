@@ -1,4 +1,4 @@
-MSCodeScanner
+CodeScanner
 ====
 
 ## Overview
@@ -20,12 +20,12 @@ MSCodeScanner
 #### Generate code
 - QR
 ```Swift
-self.imageView.image = MSCode.generateQRCode(text: "message")
+self.imageView.image = Code.generateQRCode(text: "message")
 ```
 
 - Code128Barcode
 ```Swift
-self.imageView.image = MSCode.generate128Barcode(text: "message")
+self.imageView.image = Code.generate128Barcode(text: "message")
 ```
 
 #### Detect photo
@@ -37,7 +37,7 @@ func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMe
 
     if let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
 
-        let messages: [String] = MSCode.detectQRCodes(image: selectedImage)
+        let messages: [String] = Code.detectQRCodes(image: selectedImage)
         if messages.count > 0 {
             self.textView.text = messages.first
         } else {
@@ -54,11 +54,11 @@ func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMe
 ```Swift
 import UIKit
 import AVFoundation
-import MSCodeScanner
+import CodeScanner
 
 final class QRCodeDetectForCameraViewController: UIViewController {
 
-    private var scanner: MSCodeScanner!
+    private var scanner: CodeScanner!
 
     override func viewDidLoad() {
 
@@ -67,13 +67,13 @@ final class QRCodeDetectForCameraViewController: UIViewController {
         self.navigationItem.title = "Detect QR code from Camera"
         self.view.backgroundColor = .groupTableViewBackground
 
-        self.scanner = MSCodeScanner(metadataObjectTypes: [AVMetadataObjectTypeQRCode], preview: self.view)
+        self.scanner = CodeScanner(metadataObjectTypes: [AVMetadataObjectTypeQRCode], preview: self.view)
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        MSCodeScanner.requestCameraPermission { (success) in
+        CodeScanner.requestCameraPermission { (success) in
             if success {
                 self.scanner.scan(resultOutputs: { (outputs) in
                     print(outputs)
@@ -88,11 +88,11 @@ final class QRCodeDetectForCameraViewController: UIViewController {
 ```Swift
 import UIKit
 import AVFoundation
-import MSCodeScanner
+import CodeScanner
 
 final class BarcodeDetectForCameraViewController: UIViewController {
 
-    private var scanner: MSCodeScanner!
+    private var scanner: CodeScanner!
 
     override func viewDidLoad() {
 
@@ -101,13 +101,13 @@ final class BarcodeDetectForCameraViewController: UIViewController {
         self.navigationItem.title = "Detect Barcode from Camera"
         self.view.backgroundColor = .groupTableViewBackground
 
-        self.scanner = MSCodeScanner(metadataObjectTypes: [AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeCode128Code], preview: self.view)
+        self.scanner = CodeScanner(metadataObjectTypes: [AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeCode128Code], preview: self.view)
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        MSCodeScanner.requestCameraPermission { (success) in
+        CodeScanner.requestCameraPermission { (success) in
             if success {
                 self.scanner.scan(resultOutputs: { (outputs) in
 
@@ -131,15 +131,15 @@ Add the following line to your Podfile:
 use_frameworks!
 
 target 'YOUR_TARGET_NAME' do
-  pod "MSCodeScanner"
+  pod "CodeScanner"
 end
 ```
 
 #### [Carthage](https://github.com/Carthage/Carthage)
 Add the following line to your Cartfile:
 ```ruby
-github "masashi-sutou/MSCodeScanner"
+github "masashi-sutou/CodeScanner"
 ```
 
 ## Licence
-MSCodeScanner is available under the MIT license. See the LICENSE file for more info.
+CodeScanner is available under the MIT license. See the LICENSE file for more info.

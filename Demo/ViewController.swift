@@ -14,7 +14,7 @@ final class ViewController: UITableViewController {
         
         super.viewDidLoad()
         
-        self.navigationItem.title = "MSCodeScanner-Demo"
+        self.navigationItem.title = "CodeScanner-Demo"
         self.tableView = UITableView.init(frame: self.view.frame, style: .grouped)
     }
     

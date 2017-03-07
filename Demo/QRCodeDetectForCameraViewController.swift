@@ -1,6 +1,6 @@
 //
 //  QRCodeDetectForCameraViewController.swift
-//  MSCodeScanner
+//  CodeScanner
 //
 //  Created by 須藤 将史 on 2017/02/18.
 //  Copyright © 2017年 masashi_sutou. All rights reserved.
@@ -8,11 +8,11 @@
 
 import UIKit
 import AVFoundation
-import MSCodeScanner
+import CodeScanner
 
 final class QRCodeDetectForCameraViewController: UIViewController {
     
-    private var scanner: MSCodeScanner!
+    private var scanner: CodeScanner!
     
     override func viewDidLoad() {
         
@@ -21,13 +21,13 @@ final class QRCodeDetectForCameraViewController: UIViewController {
         self.navigationItem.title = "Detect QR code by camera"
         self.view.backgroundColor = .groupTableViewBackground
         
-        self.scanner = MSCodeScanner(metadataObjectTypes: [AVMetadataObjectTypeQRCode], preview: self.view)
+        self.scanner = CodeScanner(metadataObjectTypes: [AVMetadataObjectTypeQRCode], preview: self.view)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        MSCodeScanner.requestCameraPermission { (success) in
+        CodeScanner.requestCameraPermission { (success) in
             if success {
                 self.scanner.scan(resultOutputs: { (outputs) in
                     print(outputs)

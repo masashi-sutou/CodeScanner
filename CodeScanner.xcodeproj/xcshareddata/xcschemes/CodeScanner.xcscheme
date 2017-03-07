@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "18FC2AED1E535C9E0095AE71"
-               BuildableName = "MSCodeScanner.framework"
-               BlueprintName = "MSCodeScanner"
-               ReferencedContainer = "container:MSCodeScanner.xcodeproj">
+               BuildableName = "CodeScanner.framework"
+               BlueprintName = "CodeScanner"
+               ReferencedContainer = "container:CodeScanner.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -46,9 +46,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "18FC2AED1E535C9E0095AE71"
-            BuildableName = "MSCodeScanner.framework"
-            BlueprintName = "MSCodeScanner"
-            ReferencedContainer = "container:MSCodeScanner.xcodeproj">
+            BuildableName = "CodeScanner.framework"
+            BlueprintName = "CodeScanner"
+            ReferencedContainer = "container:CodeScanner.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -64,9 +64,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "18FC2AED1E535C9E0095AE71"
-            BuildableName = "MSCodeScanner.framework"
-            BlueprintName = "MSCodeScanner"
-            ReferencedContainer = "container:MSCodeScanner.xcodeproj">
+            BuildableName = "CodeScanner.framework"
+            BlueprintName = "CodeScanner"
+            ReferencedContainer = "container:CodeScanner.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

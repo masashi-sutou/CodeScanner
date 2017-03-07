@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:MSCodeScanner.xcodeproj">
+      location = "self:/Users/apple/OSS_iOS/MSCodeScanner/CodeScanner.xcodeproj">
    </FileRef>
 </Workspace>

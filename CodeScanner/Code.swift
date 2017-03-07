@@ -1,6 +1,6 @@
 //
-//  MSCode.swift
-//  MSCodeScanner
+//  Code.swift
+//  CodeScanner
 //
 //  Created by 須藤 将史 on 2017/02/15.
 //  Copyright © 2017年 masashi_sutou. All rights reserved.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-public struct MSCode {
+public struct Code {
     
     // MARK: QR code detect
     /*

@@ -1,13 +1,13 @@
 //
 //  QRDetectForPhotoLibraryViewController.swift
-//  MSCodeScanner
+//  CodeScanner
 //
 //  Created by 須藤 将史 on 2017/02/15.
 //  Copyright © 2017年 masashi_sutou. All rights reserved.
 //
 
 import UIKit
-import MSCodeScanner
+import CodeScanner
 
 private extension Selector {
     static let albumButtonTapped = #selector(QRDetectForPhotoLibraryViewController.albumButtonTapped(_:))
@@ -70,7 +70,7 @@ final class QRDetectForPhotoLibraryViewController: UIViewController, UINavigatio
             self.imageView.image = selectedImage
             
             // display text
-            let messages: [String] = MSCode.detectQRCodes(image: selectedImage)
+            let messages: [String] = Code.detectQRCodes(image: selectedImage)
             if messages.count > 0 {
                 self.textView.text = messages.first
             } else {

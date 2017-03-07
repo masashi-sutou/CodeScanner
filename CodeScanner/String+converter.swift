@@ -1,6 +1,6 @@
 //
 //  String+converter.swift
-//  MSCodeScanner
+//  CodeScanner
 //
 //  Created by 須藤 将史 on 2017/02/18.
 //  Copyright © 2017年 masashi_sutou. All rights reserved.
