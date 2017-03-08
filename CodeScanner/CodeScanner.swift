@@ -21,9 +21,9 @@ public class CodeScanner: NSObject, AVCaptureMetadataOutputObjectsDelegate {
     
     // scan area（0 ~ 1.0）
     private let originX: CGFloat = 0.1
-    private let originY: CGFloat = 0.4
+    private let originY: CGFloat = 0.3
     private let width: CGFloat = 0.8
-    private let height: CGFloat = 0.3
+    private let height: CGFloat = 0.4
 
     public init(metadataObjectTypes: [String], preview: UIView) {
 

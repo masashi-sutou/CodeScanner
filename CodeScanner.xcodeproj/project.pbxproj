@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		180C63481E56147700ED96E1 /* BarcodeDetectForCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180C63471E56147700ED96E1 /* BarcodeDetectForCameraViewController.swift */; };
-		180C634E1E58302300ED96E1 /* String+converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180C634D1E58302300ED96E1 /* String+converter.swift */; };
+		180C634E1E58302300ED96E1 /* String+Converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180C634D1E58302300ED96E1 /* String+Converter.swift */; };
 		180C63501E58444200ED96E1 /* QRCodeDetectForCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180C634F1E58444200ED96E1 /* QRCodeDetectForCameraViewController.swift */; };
 		18FC2AF31E535C9E0095AE71 /* CodeScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = 18FC2AF11E535C9E0095AE71 /* CodeScanner.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		18FC2B001E535CB90095AE71 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FC2AFF1E535CB90095AE71 /* AppDelegate.swift */; };
@@ -50,7 +50,7 @@
 
 /* Begin PBXFileReference section */
 		180C63471E56147700ED96E1 /* BarcodeDetectForCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeDetectForCameraViewController.swift; sourceTree = "<group>"; };
-		180C634D1E58302300ED96E1 /* String+converter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+converter.swift"; sourceTree = "<group>"; };
+		180C634D1E58302300ED96E1 /* String+Converter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Converter.swift"; sourceTree = "<group>"; };
 		180C634F1E58444200ED96E1 /* QRCodeDetectForCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeDetectForCameraViewController.swift; sourceTree = "<group>"; };
 		18FC2AEE1E535C9E0095AE71 /* CodeScanner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CodeScanner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		18FC2AF11E535C9E0095AE71 /* CodeScanner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CodeScanner.h; sourceTree = "<group>"; };
@@ -111,7 +111,7 @@
 				18FC2AF11E535C9E0095AE71 /* CodeScanner.h */,
 				18FC2B141E535D410095AE71 /* Code.swift */,
 				18FC2B161E535D710095AE71 /* CodeScanner.swift */,
-				180C634D1E58302300ED96E1 /* String+converter.swift */,
+				180C634D1E58302300ED96E1 /* String+Converter.swift */,
 				18FC2AF21E535C9E0095AE71 /* Info.plist */,
 			);
 			path = CodeScanner;
@@ -283,7 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18FC2B151E535D410095AE71 /* Code.swift in Sources */,
-				180C634E1E58302300ED96E1 /* String+converter.swift in Sources */,
+				180C634E1E58302300ED96E1 /* String+Converter.swift in Sources */,
 				18FC2B171E535D710095AE71 /* CodeScanner.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

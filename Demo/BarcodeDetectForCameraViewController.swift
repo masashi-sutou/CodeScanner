@@ -33,9 +33,16 @@ final class BarcodeDetectForCameraViewController: UIViewController {
                     
                     print(outputs)
 
-                    if let isbn = outputs.first?.convartISBN() {
-                        self.scanner.stop()
-                        isbn.searchAamazon()
+                    if let output: String = outputs.first {
+
+                        if output.isJANLowerBarcode() {
+                            return
+                        }
+                        
+                        if let isbn = output.convartISBN() {
+                            self.scanner.stop()
+                            isbn.searchAamazon()
+                        }
                     }
                 })
             }
