@@ -51,25 +51,33 @@ public class CodeScanner: NSObject, AVCaptureMetadataOutputObjectsDelegate {
     
     public func scan(resultOutputs: @escaping ([String]) -> Void) {
         
-        self.captureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
+        captureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
         
         do {
-            let inputDevice: AVCaptureInput = try AVCaptureDeviceInput(device: self.captureDevice)
-            self.captureSession.addInput(inputDevice)
+            let inputDevice: AVCaptureInput = try AVCaptureDeviceInput(device: captureDevice)
+            
+            if let inputs = captureSession.inputs as? [AVCaptureDeviceInput] {
+                // avoid error that Multiple audio/video AVCaptureInputs are not currently supported
+                for input in inputs {
+                    captureSession.removeInput(input)
+                }
+            }
+            
+            captureSession.addInput(inputDevice)
             
             // AVCaptureSessionPresetHigh is the default sessionPreset value
-            self.captureSession.sessionPreset = AVCaptureSessionPresetHigh
+            captureSession.sessionPreset = AVCaptureSessionPresetHigh
 
             // setting output metadata
             let metaOutput = AVCaptureMetadataOutput()
             metaOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-            self.captureSession.addOutput(metaOutput)
+            captureSession.addOutput(metaOutput)
             
             // set metadataType setting property in initialize
             metaOutput.metadataObjectTypes = self.types
             
             // capture full screen from camera
-            self.previewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession)
+            self.previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
             self.previewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
             self.previewLayer?.frame = CGRect(x: 0, y: 0, width: self.preview.frame.width, height: self.preview.frame.height)
             self.preview.layer.insertSublayer(self.previewLayer!, at: 0)
@@ -99,7 +107,7 @@ public class CodeScanner: NSObject, AVCaptureMetadataOutputObjectsDelegate {
             // callBack
             self.resultOutputs = resultOutputs
 
-            self.captureSession.startRunning()
+            captureSession.startRunning()
             
         } catch {
             print(error)
@@ -109,13 +117,11 @@ public class CodeScanner: NSObject, AVCaptureMetadataOutputObjectsDelegate {
     // MARK: - start, stop
     
     public func start() {
-
-        self.captureSession.startRunning()
+        captureSession.startRunning()
     }
     
     public func stop() {
-        
-        self.captureSession.stopRunning()
+        captureSession.stopRunning()
     }
     
     // MARK: - AVCaptureMetadataOutputObjectsDelegate
