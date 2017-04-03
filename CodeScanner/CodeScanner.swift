@@ -54,8 +54,6 @@ public class CodeScanner: NSObject, AVCaptureMetadataOutputObjectsDelegate {
         captureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
         
         do {
-            let inputDevice: AVCaptureInput = try AVCaptureDeviceInput(device: captureDevice)
-            
             if let inputs = captureSession.inputs as? [AVCaptureDeviceInput] {
                 // avoid error that Multiple audio/video AVCaptureInputs are not currently supported
                 for input in inputs {
@@ -63,6 +61,7 @@ public class CodeScanner: NSObject, AVCaptureMetadataOutputObjectsDelegate {
                 }
             }
             
+            let inputDevice: AVCaptureInput = try AVCaptureDeviceInput(device: captureDevice)
             captureSession.addInput(inputDevice)
             
             // AVCaptureSessionPresetHigh is the default sessionPreset value
@@ -82,6 +81,8 @@ public class CodeScanner: NSObject, AVCaptureMetadataOutputObjectsDelegate {
             self.previewLayer?.frame = CGRect(x: 0, y: 0, width: self.preview.frame.width, height: self.preview.frame.height)
             self.preview.layer.insertSublayer(self.previewLayer!, at: 0)
             
+            self.setupVideoOrientation()
+
             if let type: String = self.types.first {
                 switch type {
                 case AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeCode128Code:
@@ -114,7 +115,7 @@ public class CodeScanner: NSObject, AVCaptureMetadataOutputObjectsDelegate {
         }
     }
 
-    // MARK: - start, stop
+    // MARK: - Start and Stop
     
     public func start() {
         captureSession.startRunning()
@@ -122,6 +123,34 @@ public class CodeScanner: NSObject, AVCaptureMetadataOutputObjectsDelegate {
     
     public func stop() {
         captureSession.stopRunning()
+    }
+    
+    // MARK: - VideoOrientation
+    
+    private func setupVideoOrientation() {
+        
+        let orientation = UIApplication.shared.statusBarOrientation
+        
+        guard let previewLayer = self.previewLayer else { return }
+        if previewLayer.connection.isVideoOrientationSupported {
+            self.previewLayer?.connection.videoOrientation = self.videoOrientationForInterfaceOrientation(interfaceOrientation: orientation)
+        }
+    }
+    
+    private func videoOrientationForInterfaceOrientation(interfaceOrientation: UIInterfaceOrientation) -> AVCaptureVideoOrientation {
+        
+        switch interfaceOrientation {
+        case .portrait:
+            return .portrait
+        case .portraitUpsideDown:
+            return .portraitUpsideDown
+        case .landscapeLeft:
+            return .landscapeLeft
+        case .landscapeRight:
+            return .landscapeRight
+        case .unknown:
+            return .portrait
+        }
     }
     
     // MARK: - AVCaptureMetadataOutputObjectsDelegate
