@@ -54,22 +54,34 @@ public class CodeScanner: NSObject, AVCaptureMetadataOutputObjectsDelegate {
         captureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
         
         do {
-            if let inputs = captureSession.inputs as? [AVCaptureDeviceInput] {
-                // avoid error that Multiple audio/video AVCaptureInputs are not currently supported
-                for input in inputs {
-                    captureSession.removeInput(input)
+            let inputDevice: AVCaptureInput = try AVCaptureDeviceInput(device: captureDevice)
+            
+            // avoid error that Multiple audio/video AVCaptureInputs are not currently supported
+            if !captureSession.canAddInput(inputDevice) {
+                if let inputs = captureSession.inputs as? [AVCaptureDeviceInput] {
+                    for input in inputs {
+                        captureSession.removeInput(input)
+                    }
                 }
             }
             
-            let inputDevice: AVCaptureInput = try AVCaptureDeviceInput(device: captureDevice)
             captureSession.addInput(inputDevice)
             
             // AVCaptureSessionPresetHigh is the default sessionPreset value
             captureSession.sessionPreset = AVCaptureSessionPresetHigh
-
+            
             // setting output metadata
             let metaOutput = AVCaptureMetadataOutput()
             metaOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+            
+            // avoid error that because more than one output of the same type is unsupported
+            if !captureSession.canAddOutput(metaOutput) {
+                if let outputs = captureSession.outputs as? [AVCaptureMetadataOutput] {
+                    for output in outputs {
+                        captureSession.removeOutput(output)
+                    }
+                }
+            }
             captureSession.addOutput(metaOutput)
             
             // set metadataType setting property in initialize
