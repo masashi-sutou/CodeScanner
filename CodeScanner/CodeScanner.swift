@@ -15,7 +15,7 @@ public class CodeScanner: NSObject, AVCaptureMetadataOutputObjectsDelegate {
     private var previewLayer: AVCaptureVideoPreviewLayer?
     private var captureDevice: AVCaptureDevice?
 
-    private var types: [String]!
+    private var types: [AVMetadataObject.ObjectType]!
     private var preview: UIView!
     private var resultOutputs: (([String]) -> Void)?
     
@@ -25,7 +25,7 @@ public class CodeScanner: NSObject, AVCaptureMetadataOutputObjectsDelegate {
     private let width: CGFloat = 0.8
     private let height: CGFloat = 0.4
 
-    public init(metadataObjectTypes: [String], preview: UIView) {
+    public init(metadataObjectTypes: [AVMetadataObject.ObjectType], preview: UIView) {
 
         super.init()
         self.types = metadataObjectTypes
@@ -35,13 +35,13 @@ public class CodeScanner: NSObject, AVCaptureMetadataOutputObjectsDelegate {
     public class func requestCameraPermission(success: @escaping (Bool) -> Void) {
         
         // Determine whether camera is available
-        switch AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo) {
+        switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized:
             success(true)
         case .denied, .restricted:
             success(false)
         case .notDetermined:
-            AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo, completionHandler: { (granted) in
+            AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { (granted) in
                 DispatchQueue.main.async {
                     success(granted)
                 }
@@ -51,10 +51,10 @@ public class CodeScanner: NSObject, AVCaptureMetadataOutputObjectsDelegate {
     
     public func scan(resultOutputs: @escaping ([String]) -> Void) {
         
-        captureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
+        captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
         
         do {
-            let inputDevice: AVCaptureInput = try AVCaptureDeviceInput(device: captureDevice)
+            let inputDevice: AVCaptureInput = try AVCaptureDeviceInput(device: captureDevice!)
             
             // avoid error that Multiple audio/video AVCaptureInputs are not currently supported
             if !captureSession.canAddInput(inputDevice) {
@@ -68,7 +68,7 @@ public class CodeScanner: NSObject, AVCaptureMetadataOutputObjectsDelegate {
             captureSession.addInput(inputDevice)
             
             // AVCaptureSessionPresetHigh is the default sessionPreset value
-            captureSession.sessionPreset = AVCaptureSessionPresetHigh
+            captureSession.sessionPreset = AVCaptureSession.Preset.high
             
             // setting output metadata
             let metaOutput = AVCaptureMetadataOutput()
@@ -89,15 +89,15 @@ public class CodeScanner: NSObject, AVCaptureMetadataOutputObjectsDelegate {
             
             // capture full screen from camera
             self.previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-            self.previewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
+            self.previewLayer?.videoGravity = .resizeAspectFill
             self.previewLayer?.frame = CGRect(x: 0, y: 0, width: self.preview.frame.width, height: self.preview.frame.height)
             self.preview.layer.insertSublayer(self.previewLayer!, at: 0)
             
             self.setupVideoOrientation()
 
-            if let type: String = self.types.first {
+            if let type: AVMetadataObject.ObjectType = self.types.first {
                 switch type {
-                case AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeCode128Code:
+                case .ean8, .ean13, .code128:
 
                     // scan area
                     metaOutput.rectOfInterest = CGRect(x: originY, y: 1 - originX - width, width: height, height: width)
@@ -110,7 +110,7 @@ public class CodeScanner: NSObject, AVCaptureMetadataOutputObjectsDelegate {
                     borderView.layer.borderColor = UIColor.red.cgColor
                     self.preview.addSubview(borderView)
                     
-                case AVMetadataObjectTypeQRCode:
+                case .qr:
                     break
                 default:
                     break
@@ -144,8 +144,8 @@ public class CodeScanner: NSObject, AVCaptureMetadataOutputObjectsDelegate {
         let orientation = UIApplication.shared.statusBarOrientation
         
         guard let previewLayer = self.previewLayer else { return }
-        if previewLayer.connection.isVideoOrientationSupported {
-            self.previewLayer?.connection.videoOrientation = self.videoOrientationForInterfaceOrientation(interfaceOrientation: orientation)
+        if (previewLayer.connection?.isVideoOrientationSupported)! {
+            self.previewLayer?.connection?.videoOrientation = self.videoOrientationForInterfaceOrientation(interfaceOrientation: orientation)
         }
     }
     
@@ -167,13 +167,11 @@ public class CodeScanner: NSObject, AVCaptureMetadataOutputObjectsDelegate {
     
     // MARK: - AVCaptureMetadataOutputObjectsDelegate
     
-    public func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
+    public func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         
-        guard let objects = metadataObjects as? [AVMetadataObject] else { return }
-
         var detectionStrings: [String] = []
         
-        for metadataObject in objects {
+        for metadataObject in metadataObjects {
             loop: for type in self.types {
                 guard metadataObject.type == type else { continue }
                 guard self.previewLayer?.transformedMetadataObject(for: metadataObject) is AVMetadataMachineReadableCodeObject else { continue }
@@ -181,12 +179,12 @@ public class CodeScanner: NSObject, AVCaptureMetadataOutputObjectsDelegate {
 
                     #if DEBUG
                         var text = "Scan Value: "
-                        text += "\(object.stringValue)"
+                        text += "\(String(describing: object.stringValue))"
                         text += "\n"
                         print(text)
                     #endif
 
-                    detectionStrings.append(object.stringValue)
+                    detectionStrings.append(object.stringValue!)
                     break loop
                 }
             }

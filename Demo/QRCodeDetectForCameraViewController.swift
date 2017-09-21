@@ -21,7 +21,7 @@ final class QRCodeDetectForCameraViewController: UIViewController {
         self.navigationItem.title = "Detect QR code by camera"
         self.view.backgroundColor = .groupTableViewBackground
         
-        self.scanner = CodeScanner(metadataObjectTypes: [AVMetadataObjectTypeQRCode], preview: self.view)
+        self.scanner = CodeScanner(metadataObjectTypes: [.qr], preview: self.view)
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -30,7 +30,10 @@ public extension String {
             return nil
         }
         
-        let isbn9 = self.substring(with: self.index(self.startIndex, offsetBy: 3)..<self.index(self.endIndex, offsetBy: -1))
+        // "978XXXXXXXXX5" → XXXXXXXXX
+        let startIdx: String.Index = self.index(self.startIndex, offsetBy: 3)
+        let endIdx: String.Index = self.index(self.endIndex, offsetBy: -1)
+        let isbn9 = self[startIdx..<endIdx].description
         
         return isbn9 + isbn9.checkDigit()
     }

@@ -9,10 +9,6 @@
 import UIKit
 import CodeScanner
 
-private extension Selector {
-    static let albumButtonTapped = #selector(QRDetectForPhotoLibraryViewController.albumButtonTapped(_:))
-}
-
 final class QRDetectForPhotoLibraryViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     private var scrollView: UIScrollView = UIScrollView()
@@ -25,7 +21,7 @@ final class QRDetectForPhotoLibraryViewController: UIViewController, UINavigatio
         super.viewDidLoad()
         
         self.navigationItem.title = "Detect QR code in photo"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "album", style: .done, target: self, action: .albumButtonTapped)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "album", style: .done, target: self, action: #selector(QRDetectForPhotoLibraryViewController.albumButtonTapped(_:)))
         self.view.backgroundColor = .groupTableViewBackground
         
         self.picker = UIImagePickerController()
@@ -52,7 +48,7 @@ final class QRDetectForPhotoLibraryViewController: UIViewController, UINavigatio
         self.view.addSubview(self.scrollView)
     }
     
-    func albumButtonTapped(_ sender: UIBarButtonItem) {
+    @objc func albumButtonTapped(_ sender: UIBarButtonItem) {
         
         // Determine whether library is available
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {

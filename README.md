@@ -12,8 +12,8 @@ CodeScanner
   - Code128Barcode
 
 ## Requirement
-- Xcode 8
-- Swift 3
+- Xcode 8 or later
+- Swift 3 or later
 - iOS 8.0 or later
 
 ## Usage

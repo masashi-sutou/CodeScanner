@@ -51,7 +51,7 @@ public struct Code {
             let outputImage = filter.outputImage
             else { return nil }
         
-        return UIImage(ciImage: outputImage.applying(CGAffineTransform(scaleX: 10, y: 10)))
+        return UIImage(ciImage: outputImage.transformed(by: CGAffineTransform(scaleX: 10, y: 10)))
     }
     
     // MARK: Barcode generate
@@ -66,6 +66,6 @@ public struct Code {
             let outputImage = filter.outputImage
             else { return nil }
         
-        return UIImage(ciImage: outputImage.applying(CGAffineTransform(scaleX: 10, y: 10)))
+        return UIImage(ciImage: outputImage.transformed(by: CGAffineTransform(scaleX: 10, y: 10)))
     }
 }

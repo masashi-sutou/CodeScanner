@@ -21,7 +21,7 @@ final class BarcodeDetectForCameraViewController: UIViewController {
         self.navigationItem.title = "Detect barcode by camera"
         self.view.backgroundColor = .groupTableViewBackground
         
-        self.scanner = CodeScanner(metadataObjectTypes: [AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeCode128Code], preview: self.view)
+        self.scanner = CodeScanner(metadataObjectTypes: [.ean8, .ean13, .code128], preview: self.view)
     }
     
     override func viewDidAppear(_ animated: Bool) {

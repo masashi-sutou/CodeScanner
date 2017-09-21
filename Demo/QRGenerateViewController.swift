@@ -9,10 +9,6 @@
 import UIKit
 import CodeScanner
 
-private extension Selector {
-    static let generateButtonTapped = #selector(QRGenerateViewController.generateButtonTapped(_:))
-}
-
 final class QRGenerateViewController: UIViewController {
     
     private var imageView: UIImageView = UIImageView()
@@ -24,7 +20,7 @@ final class QRGenerateViewController: UIViewController {
         self.navigationItem.title = "Generate a QR code"
         self.view.backgroundColor = .groupTableViewBackground
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "generate", style: .done, target: self, action: .generateButtonTapped)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "generate", style: .done, target: self, action: #selector(QRGenerateViewController.generateButtonTapped(_:)))
         
         self.imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.width))
         self.imageView.center = self.view.center
@@ -33,7 +29,7 @@ final class QRGenerateViewController: UIViewController {
         self.view.addSubview(imageView)
     }
     
-    func generateButtonTapped(_ sender: UIBarButtonItem) {
+    @objc func generateButtonTapped(_ sender: UIBarButtonItem) {
         
         let alert = UIAlertController(title: "Generate a QR code", message: "Enter the text you want to make into the QR code", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {(_) -> Void in }))
